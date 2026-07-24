@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace InvolveDigital\LaravelForms\Inputs;
 
+use InvolveDigital\LaravelForms\Rules\InOptions;
 use InvolveDigital\LaravelForms\Traits\THasLabel;
 use InvolveDigital\LaravelForms\Traits\THasTooltip;
 use Illuminate\Support\Collection;
-use Illuminate\Validation\Rule;
 
 class Select extends BaseField
 {
@@ -38,7 +38,7 @@ class Select extends BaseField
         $input->setThemeType('select');
 
         if ($withOptionValidation) {
-            $input->addRule(Rule::in(array_keys($input->getOptions())));
+            $input->addRule(new InOptions($input));
         }
 
         return $input;
